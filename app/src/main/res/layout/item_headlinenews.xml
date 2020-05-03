@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable name="headlines"
+            type="com.anugrahdev.litenews.data.db.entities.headlines.Article" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginBottom="18dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:image="@{headlines.urlToImage}"
+                tools:src="@drawable/sport" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:paddingHorizontal="10dp"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@{headlines.title}"
+                tools:text="Pemerintah Wajib Jalankan UU Kekarantinaan Kesehatan, Biayai Rakyat! - VIVA - VIVA.co.id" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:paddingBottom="6dp"
+                android:text="@{headlines.description}"
+                tools:text="Berita Pemerintah Wajib Jalankan UU Kekarantinaan Kesehatan, Biayai Rakyat! terbaru hari ini 2020-05-03 06:30:02 dari sumber yang terpercaya"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLightGray"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

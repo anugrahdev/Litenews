@@ -1,0 +1,7 @@
+package com.anugrahdev.litenews.ui.settings
+
+import androidx.lifecycle.ViewModel
+
+class SettingsViewModel : ViewModel() {
+    // TODO: Implement the ViewModel
+}
