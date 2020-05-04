@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <variable name="headlines"
+        <variable name="news"
             type="com.anugrahdev.litenews.data.db.entities.headlines.Article" />
 
     </data>
@@ -32,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:image="@{headlines.urlToImage}"
+                app:image="@{news.urlToImage}"
                 tools:src="@drawable/sport" />
 
 
@@ -42,7 +42,7 @@
                 android:paddingTop="6dp"
                 android:paddingHorizontal="10dp"
                 android:fontFamily="@font/poppinsbold"
-                android:text="@{headlines.title}"
+                android:text="@{news.title}"
                 tools:text="Pemerintah Wajib Jalankan UU Kekarantinaan Kesehatan, Biayai Rakyat! - VIVA - VIVA.co.id" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10dp"
                 android:paddingBottom="6dp"
-                android:text="@{headlines.description}"
+                android:text="@{news.description}"
                 tools:text="Berita Pemerintah Wajib Jalankan UU Kekarantinaan Kesehatan, Biayai Rakyat! terbaru hari ini 2020-05-03 06:30:02 dari sumber yang terpercaya"
                 android:textSize="12sp" />
         </LinearLayout>
