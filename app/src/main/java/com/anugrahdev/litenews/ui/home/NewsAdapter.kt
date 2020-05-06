@@ -30,7 +30,10 @@ class NewsAdapter(
             )
         )
 
-    override fun getItemCount(): Int = article.size
+    override fun getItemCount(): Int {
+//        showShimmer?SHIMMER_ITEM_NUMBER :
+        return  article.size
+    }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.item.news = article[position]

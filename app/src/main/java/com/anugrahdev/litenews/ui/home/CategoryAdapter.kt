@@ -35,6 +35,11 @@ class CategoryAdapter(
         holder.itembinding.imageView.setOnClickListener {
             when (cat[position].name){
                 "Sports"->Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_sportsFragment)
+                "Technology"->Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_technologyFragment)
+                "Science"->Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_scienceFragment)
+                "Health"->Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_healthFragment)
+                "Entertainment"->Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_entertainmentFragment)
+                "Business"->Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_businessFragment)
             }
         }
 

@@ -15,7 +15,8 @@ interface ApiService {
 
     @GET("top-headlines")
     suspend fun getTopHeadlines(
-        @Query("country") country:String
+        @Query("country") country:String,
+        @Query("category") category:String
     ):Response<HeadlinesResponse>
 
     @GET("everything")

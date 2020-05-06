@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-        getSupportActionBar()?.setDisplayShowTitleEnabled(false);
+        supportActionBar?.title = " "
 
         navController = Navigation.findNavController(this,R.id.nav_host_fragment)
         bottom_nav.setupWithNavController(navController)

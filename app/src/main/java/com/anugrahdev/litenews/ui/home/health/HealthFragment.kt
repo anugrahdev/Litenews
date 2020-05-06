@@ -1,6 +1,5 @@
-package com.anugrahdev.litenews.ui.home.sports
+package com.anugrahdev.litenews.ui.home.health
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,27 +15,23 @@ import com.anugrahdev.litenews.ui.home.HomeViewModel
 import com.anugrahdev.litenews.ui.home.HomeViewModelFactory
 import com.anugrahdev.litenews.ui.home.NewsAdapter
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.recycler_view
-import kotlinx.android.synthetic.main.home_fragment.shimmerFrameLayout
-import kotlinx.android.synthetic.main.sports_fragment.*
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import org.kodein.di.android.x.kodein
 
-class SportsFragment : Fragment(), KodeinAware {
+
+class HealthFragment : Fragment(), KodeinAware {
+
+    lateinit var viewModel:HomeViewModel
     override val kodein by kodein()
-    private val factory:HomeViewModelFactory by instance<HomeViewModelFactory>()
-    companion object {
-        fun newInstance() = SportsFragment()
-    }
-
-    private lateinit var viewModel: HomeViewModel
+    private val factory: HomeViewModelFactory by instance<HomeViewModelFactory>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.sports_fragment, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.health_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,17 +39,18 @@ class SportsFragment : Fragment(), KodeinAware {
         (activity as AppCompatActivity).supportActionBar?.show()
 
         viewModel = ViewModelProvider(this,factory).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
-        viewModel.getHeadlinesSports()
+        viewModel.getHeadlinesHealth()
         viewModel.headlines.observe(viewLifecycleOwner, Observer { news->
-            recycler_view.also {
-                it.layoutManager = LinearLayoutManager(requireContext())
-                it.adapter = context?.let { it1 -> NewsAdapter(news, it1) }
+            recycler_view.apply {
+                this.layoutManager = LinearLayoutManager(requireContext())
+                this.adapter = NewsAdapter(news, requireContext())
                 shimmerFrameLayout.stopShimmer()
                 shimmerFrameLayout.visibility = View.GONE
-                it.visibility = View.VISIBLE
+                this.visibility = View.VISIBLE
             }
         })
+
+
     }
 
     override fun onResume() {

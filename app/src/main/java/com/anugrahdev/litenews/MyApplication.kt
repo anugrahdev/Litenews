@@ -19,5 +19,6 @@ class MyApplication:Application(), KodeinAware {
         bind() from singleton { HeadlinesRepository(instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
 
+
     }
 }

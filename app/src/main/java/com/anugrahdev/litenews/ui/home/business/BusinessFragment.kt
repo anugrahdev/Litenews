@@ -1,4 +1,4 @@
-package com.anugrahdev.litenews.ui.home.sports
+package com.anugrahdev.litenews.ui.home.business
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,28 +16,30 @@ import com.anugrahdev.litenews.R
 import com.anugrahdev.litenews.ui.home.HomeViewModel
 import com.anugrahdev.litenews.ui.home.HomeViewModelFactory
 import com.anugrahdev.litenews.ui.home.NewsAdapter
+import kotlinx.android.synthetic.main.business_fragment.*
+import kotlinx.android.synthetic.main.business_fragment.recycler_view
+import kotlinx.android.synthetic.main.business_fragment.shimmerFrameLayout
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.recycler_view
-import kotlinx.android.synthetic.main.home_fragment.shimmerFrameLayout
-import kotlinx.android.synthetic.main.sports_fragment.*
+import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class SportsFragment : Fragment(), KodeinAware {
+class BusinessFragment : Fragment(), KodeinAware {
+
     override val kodein by kodein()
-    private val factory:HomeViewModelFactory by instance<HomeViewModelFactory>()
     companion object {
-        fun newInstance() = SportsFragment()
+        fun newInstance() = BusinessFragment()
     }
 
     private lateinit var viewModel: HomeViewModel
+    private val factory:HomeViewModelFactory by instance<HomeViewModelFactory>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.sports_fragment, container, false)
+        return inflater.inflate(R.layout.business_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,12 +47,11 @@ class SportsFragment : Fragment(), KodeinAware {
         (activity as AppCompatActivity).supportActionBar?.show()
 
         viewModel = ViewModelProvider(this,factory).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
-        viewModel.getHeadlinesSports()
-        viewModel.headlines.observe(viewLifecycleOwner, Observer { news->
-            recycler_view.also {
+        viewModel.getHeadlinesBusiness()
+        viewModel.headlines.observe(viewLifecycleOwner, Observer {news->
+            recycler_view.also{
                 it.layoutManager = LinearLayoutManager(requireContext())
-                it.adapter = context?.let { it1 -> NewsAdapter(news, it1) }
+                it.adapter = NewsAdapter(news,requireContext())
                 shimmerFrameLayout.stopShimmer()
                 shimmerFrameLayout.visibility = View.GONE
                 it.visibility = View.VISIBLE

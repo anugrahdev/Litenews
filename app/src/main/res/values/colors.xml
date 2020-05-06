@@ -18,4 +18,5 @@
     <color name="search">#E6A919</color>
     <color name="profile">#1194AA</color>
     <color name="mainblue">#3889D3 </color>
+    <color name="placeholder_color">#DDDDDD</color>
 </resources>

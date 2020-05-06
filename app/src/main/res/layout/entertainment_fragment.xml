@@ -12,9 +12,9 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmerFrameLayout"
                 android:layout_width="match_parent"
@@ -42,6 +42,7 @@
 
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
@@ -51,7 +52,9 @@
                 android:paddingTop="10dp"
                 android:scrollbars="vertical"
                 tools:listitem="@layout/item_news" />
+
         </LinearLayout>
+
 
 
     </androidx.core.widget.NestedScrollView>

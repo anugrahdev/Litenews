@@ -13,20 +13,58 @@
         <action
             android:id="@+id/action_homeFragment_to_sportsFragment"
             app:destination="@id/sportsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_technologyFragment"
+            app:destination="@id/technologyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_healthFragment"
+            app:destination="@id/healthFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_scienceFragment"
+            app:destination="@id/scienceFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_entertainmentFragment"
+            app:destination="@id/entertainmentFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_businessFragment"
+            app:destination="@id/businessFragment" />
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
         android:name="com.anugrahdev.litenews.ui.explore.ExploreFragment"
-        android:label="explore_fragment"
+        android:label="Explore"
         tools:layout="@layout/explore_fragment" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.anugrahdev.litenews.ui.settings.SettingsFragment"
-        android:label="settings_fragment"
+        android:label="Settings"
         tools:layout="@layout/settings_fragment" />
     <fragment
         android:id="@+id/sportsFragment"
         android:name="com.anugrahdev.litenews.ui.home.sports.SportsFragment"
-        android:label="sports_fragment"
+        android:label="Sports"
         tools:layout="@layout/sports_fragment" />
+    <fragment
+        android:id="@+id/technologyFragment"
+        android:name="com.anugrahdev.litenews.ui.home.technology.TechnologyFragment"
+        android:label="Technology" />
+    <fragment
+        android:id="@+id/healthFragment"
+        android:name="com.anugrahdev.litenews.ui.home.health.HealthFragment"
+        android:label="Health"
+        tools:layout="@layout/health_fragment" />
+    <fragment
+        android:id="@+id/scienceFragment"
+        android:name="com.anugrahdev.litenews.ui.home.science.ScienceFragment"
+        android:label="Science"
+        tools:layout="@layout/science_fragment" />
+    <fragment
+        android:id="@+id/entertainmentFragment"
+        android:name="com.anugrahdev.litenews.ui.home.entertainment.EntertainmentFragment"
+        android:label="Entertainment" />
+    <fragment
+        android:id="@+id/businessFragment"
+        android:name="com.anugrahdev.litenews.ui.home.business.BusinessFragment"
+        android:label="Business"
+        tools:layout="@layout/business_fragment" />
 </navigation>

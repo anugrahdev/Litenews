@@ -91,5 +91,9 @@ dependencies {
     implementation "com.google.android.material:material:1.1.0"
     implementation "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.1.0"
 
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+
+
 
 }

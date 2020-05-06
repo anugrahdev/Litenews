@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anugrahdev.litenews.R
 import com.anugrahdev.litenews.data.db.entities.Category
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -30,11 +31,16 @@ class HomeFragment : Fragment(), KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        activity?.bottom_nav?.visibility = View.VISIBLE
+
+        (activity as AppCompatActivity).supportActionBar?.hide()
+
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         // TODO: Use the ViewModel
 
@@ -78,7 +84,10 @@ class HomeFragment : Fragment(), KodeinAware {
         viewModel.headlines.observe(viewLifecycleOwner, Observer {news->
             recycler_view.also {
                 it.layoutManager = LinearLayoutManager(requireContext())
-                it.adapter = context?.let { it1 -> NewsAdapter(news, it1) }
+                it.adapter = NewsAdapter(news,requireContext())
+                shimmerFrameLayout.stopShimmer()
+                shimmerFrameLayout.visibility = View.GONE
+                it.visibility = View.VISIBLE
             }
         })
 
@@ -86,12 +95,12 @@ class HomeFragment : Fragment(), KodeinAware {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+        shimmerFrameLayout.startShimmer()
     }
 
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    override fun onPause() {
+        shimmerFrameLayout.stopShimmer()
+        super.onPause()
     }
 
 }

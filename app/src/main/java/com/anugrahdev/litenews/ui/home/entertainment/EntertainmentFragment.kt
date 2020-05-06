@@ -1,4 +1,4 @@
-package com.anugrahdev.litenews.ui.home.sports
+package com.anugrahdev.litenews.ui.home.entertainment
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -16,18 +16,15 @@ import com.anugrahdev.litenews.ui.home.HomeViewModel
 import com.anugrahdev.litenews.ui.home.HomeViewModelFactory
 import com.anugrahdev.litenews.ui.home.NewsAdapter
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.recycler_view
-import kotlinx.android.synthetic.main.home_fragment.shimmerFrameLayout
-import kotlinx.android.synthetic.main.sports_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class SportsFragment : Fragment(), KodeinAware {
+class EntertainmentFragment : Fragment(), KodeinAware {
     override val kodein by kodein()
-    private val factory:HomeViewModelFactory by instance<HomeViewModelFactory>()
+    private val factory: HomeViewModelFactory by instance<HomeViewModelFactory>()
     companion object {
-        fun newInstance() = SportsFragment()
+        fun newInstance() = EntertainmentFragment()
     }
 
     private lateinit var viewModel: HomeViewModel
@@ -36,7 +33,7 @@ class SportsFragment : Fragment(), KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.sports_fragment, container, false)
+        return inflater.inflate(R.layout.entertainment_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,15 +41,14 @@ class SportsFragment : Fragment(), KodeinAware {
         (activity as AppCompatActivity).supportActionBar?.show()
 
         viewModel = ViewModelProvider(this,factory).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
-        viewModel.getHeadlinesSports()
+        viewModel.getHeadlinesEntertainment()
         viewModel.headlines.observe(viewLifecycleOwner, Observer { news->
-            recycler_view.also {
-                it.layoutManager = LinearLayoutManager(requireContext())
-                it.adapter = context?.let { it1 -> NewsAdapter(news, it1) }
+            recycler_view.apply {
+                this.layoutManager = LinearLayoutManager(requireContext())
+                this.adapter = NewsAdapter(news, requireContext())
                 shimmerFrameLayout.stopShimmer()
                 shimmerFrameLayout.visibility = View.GONE
-                it.visibility = View.VISIBLE
+                this.visibility = View.VISIBLE
             }
         })
     }
@@ -66,5 +62,6 @@ class SportsFragment : Fragment(), KodeinAware {
         shimmerFrameLayout.stopShimmer()
         super.onPause()
     }
+
 
 }
