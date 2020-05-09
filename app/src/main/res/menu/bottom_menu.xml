@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cnb_unselectedColor="#666666">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
-        android:title="Home"
-        app:cnb_iconColor="@color/home" />
+        android:title="Home" />
 
     <item
         android:id="@+id/exploreFragment"
         android:icon="@drawable/ic_search"
-        android:title="Explore"
-        app:cnb_iconColor="@color/profile" />
+        android:title="Explore" />
     <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_settings"
-        android:title="Settings"
-        app:cnb_iconColor="@color/search" />
+        android:id="@+id/savedFragment"
+        android:icon="@drawable/ic_savebookmark"
+        android:title="Saved" />
 </menu>

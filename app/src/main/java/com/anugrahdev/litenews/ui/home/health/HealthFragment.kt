@@ -1,6 +1,7 @@
 package com.anugrahdev.litenews.ui.home.health
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,24 +9,30 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.anugrahdev.litenews.R
-import com.anugrahdev.litenews.ui.home.HomeViewModel
-import com.anugrahdev.litenews.ui.home.HomeViewModelFactory
+import com.anugrahdev.litenews.ui.NewsActivity
+import com.anugrahdev.litenews.ui.NewsViewModel
+import com.anugrahdev.litenews.ui.NewsViewModelFactory
 import com.anugrahdev.litenews.ui.home.NewsAdapter
+import com.anugrahdev.litenews.ui.home.News_Adapter
+import com.anugrahdev.litenews.utils.Resource
 import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.home_fragment.recycler_view
+import kotlinx.android.synthetic.main.home_fragment.shimmerFrameLayout
+import kotlinx.android.synthetic.main.technology_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 import org.kodein.di.android.x.kodein
 
 
-class HealthFragment : Fragment(), KodeinAware {
+class HealthFragment : Fragment() {
 
-    lateinit var viewModel:HomeViewModel
-    override val kodein by kodein()
-    private val factory: HomeViewModelFactory by instance<HomeViewModelFactory>()
-
+    lateinit var newsAdapter: News_Adapter
+    private lateinit var viewModel: NewsViewModel
+    private val TAG ="HealthFragment"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,20 +44,46 @@ class HealthFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.show()
+        viewModel = (activity as NewsActivity).viewModel
+        setupRecyclerView()
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("article",it)
+            }
+            findNavController().navigate(R.id.action_healthFragment_to_newsDetailActivity,bundle)
+        }
+        viewModel.getNews("id","health")
+        viewModel.news.observe(viewLifecycleOwner, Observer {response->
+            when(response){
+                is Resource.Success->{
 
-        viewModel = ViewModelProvider(this,factory).get(HomeViewModel::class.java)
-        viewModel.getHeadlinesHealth()
-        viewModel.headlines.observe(viewLifecycleOwner, Observer { news->
-            recycler_view.apply {
-                this.layoutManager = LinearLayoutManager(requireContext())
-                this.adapter = NewsAdapter(news, requireContext())
-                shimmerFrameLayout.stopShimmer()
-                shimmerFrameLayout.visibility = View.GONE
-                this.visibility = View.VISIBLE
+                    response.data?.let {
+                        newsAdapter.differ.submitList(it.articles)
+                        shimmerFrameLayout.stopShimmer()
+                        shimmerFrameLayout.visibility = View.GONE
+                    }
+                }
+                is Resource.Error->{
+                    shimmerFrameLayout.stopShimmer()
+                    shimmerFrameLayout.visibility = View.GONE
+                    response.message?.let {
+                        Log.d(TAG,"Error occured $it")
+                    }
+                }
+                is Resource.Loading->{
+                    shimmerFrameLayout.startShimmer()
+                    shimmerFrameLayout.visibility = View.VISIBLE
+                }
             }
         })
+    }
 
-
+    private fun setupRecyclerView(){
+        newsAdapter = News_Adapter()
+        recycler_view.apply {
+            adapter = newsAdapter
+            layoutManager = LinearLayoutManager(activity)
+        }
     }
 
     override fun onResume() {

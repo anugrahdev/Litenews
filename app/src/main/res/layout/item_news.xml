@@ -2,7 +2,7 @@
 <layout>
     <data>
         <variable name="news"
-            type="com.anugrahdev.litenews.data.db.entities.headlines.Article" />
+            type="com.anugrahdev.litenews.data.db.entities.Article" />
 
     </data>
 

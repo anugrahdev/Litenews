@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.anugrahdev.litenews.R
-import com.anugrahdev.litenews.data.db.entities.headlines.Article
+import com.anugrahdev.litenews.data.db.entities.Article
 import com.anugrahdev.litenews.databinding.ItemNewsBinding
 import com.anugrahdev.litenews.ui.NewsDetailActivity
 
@@ -41,7 +41,7 @@ class NewsAdapter(
             Intent(context, NewsDetailActivity::class.java).also { intent->
                 intent.putExtra("url", article[position].url);
                 intent.putExtra("img", article[position].urlToImage);
-                intent.putExtra("source", article[position].source.name);
+                intent.putExtra("source", article[position].source?.name);
                 intent.putExtra("author",article[position].author);
                 intent.putExtra("title",article[position].title);
                 intent.putExtra("date",article[position].publishedAt)

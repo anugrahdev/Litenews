@@ -1,15 +1,15 @@
-package com.anugrahdev.litenews.ui.home
+package com.anugrahdev.litenews.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.anugrahdev.litenews.data.repositories.HeadlinesRepository
+import com.anugrahdev.litenews.data.repositories.NewsRepository
 
-class HomeViewModelFactory(private val repository: HeadlinesRepository):
+class NewsViewModelFactory(private val repository: NewsRepository):
     ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return HomeViewModel(repository) as T
+        return NewsViewModel(repository) as T
     }
 
 }

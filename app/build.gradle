@@ -12,6 +12,15 @@ android {
         enabled = true
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     defaultConfig {
         applicationId "com.anugrahdev.litenews"
         minSdkVersion 23
@@ -92,8 +101,6 @@ dependencies {
     implementation "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.1.0"
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-
-
 
 
 }

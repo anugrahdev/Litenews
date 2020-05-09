@@ -2,17 +2,24 @@ package com.anugrahdev.litenews.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.anugrahdev.litenews.R
 import kotlinx.android.synthetic.main.activity_main.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
 
-class MainActivity : AppCompatActivity() {
+class NewsActivity : AppCompatActivity(), KodeinAware {
 
     private lateinit var navController : NavController
-
+    override val kodein by kodein()
+    lateinit var viewModel: NewsViewModel
+    private val factory: NewsViewModelFactory by instance<NewsViewModelFactory>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this,R.id.nav_host_fragment)
         bottom_nav.setupWithNavController(navController)
         NavigationUI.setupActionBarWithNavController(this,navController)
+
+        viewModel = ViewModelProvider(this,factory).get(NewsViewModel::class.java)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

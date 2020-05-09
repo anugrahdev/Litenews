@@ -8,63 +8,130 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.anugrahdev.litenews.ui.home.HomeFragment"
-        android:label="home_fragment"
-        tools:layout="@layout/home_fragment" >
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_sportsFragment"
-            app:destination="@id/sportsFragment" />
+            app:destination="@id/sportsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_technologyFragment"
-            app:destination="@id/technologyFragment" />
+            app:destination="@id/technologyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_healthFragment"
-            app:destination="@id/healthFragment" />
+            app:destination="@id/healthFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_scienceFragment"
-            app:destination="@id/scienceFragment" />
+            app:destination="@id/scienceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_entertainmentFragment"
-            app:destination="@id/entertainmentFragment" />
+            app:destination="@id/entertainmentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_businessFragment"
-            app:destination="@id/businessFragment" />
+            app:destination="@id/businessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
         android:name="com.anugrahdev.litenews.ui.explore.ExploreFragment"
         android:label="Explore"
-        tools:layout="@layout/explore_fragment" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.anugrahdev.litenews.ui.settings.SettingsFragment"
-        android:label="Settings"
-        tools:layout="@layout/settings_fragment" />
+        tools:layout="@layout/explore_fragment" >
+        <action
+            android:id="@+id/action_exploreFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/sportsFragment"
         android:name="com.anugrahdev.litenews.ui.home.sports.SportsFragment"
         android:label="Sports"
-        tools:layout="@layout/sports_fragment" />
+        tools:layout="@layout/sports_fragment" >
+        <action
+            android:id="@+id/action_sportsFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/technologyFragment"
         android:name="com.anugrahdev.litenews.ui.home.technology.TechnologyFragment"
-        android:label="Technology" />
+        android:label="Technology" >
+        <action
+            android:id="@+id/action_technologyFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/healthFragment"
         android:name="com.anugrahdev.litenews.ui.home.health.HealthFragment"
         android:label="Health"
-        tools:layout="@layout/health_fragment" />
+        tools:layout="@layout/health_fragment" >
+        <action
+            android:id="@+id/action_healthFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/scienceFragment"
         android:name="com.anugrahdev.litenews.ui.home.science.ScienceFragment"
         android:label="Science"
-        tools:layout="@layout/science_fragment" />
+        tools:layout="@layout/science_fragment" >
+        <action
+            android:id="@+id/action_scienceFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/entertainmentFragment"
         android:name="com.anugrahdev.litenews.ui.home.entertainment.EntertainmentFragment"
-        android:label="Entertainment" />
+        android:label="Entertainment" >
+        <action
+            android:id="@+id/action_entertainmentFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/businessFragment"
         android:name="com.anugrahdev.litenews.ui.home.business.BusinessFragment"
         android:label="Business"
-        tools:layout="@layout/business_fragment" />
+        tools:layout="@layout/business_fragment" >
+        <action
+            android:id="@+id/action_businessFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/newsDetailActivity"
+        android:name="com.anugrahdev.litenews.ui.NewsDetailActivity"
+        android:label="activity_news_detail"
+        tools:layout="@layout/activity_news_detail" >
+        <argument
+            android:name="article"
+            app:argType="com.anugrahdev.litenews.data.db.entities.Article" />
+    </activity>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.anugrahdev.litenews.ui.saved.SavedFragment"
+        android:label="Saved Articles"
+        tools:layout="@layout/fragment_saved" >
+        <action
+            android:id="@+id/action_savedFragment_to_newsDetailActivity"
+            app:destination="@id/newsDetailActivity" />
+    </fragment>
 </navigation>

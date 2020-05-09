@@ -1,72 +1,85 @@
 package com.anugrahdev.litenews.ui
 
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.navArgs
 import com.anugrahdev.litenews.R
+import com.anugrahdev.litenews.utils.snackbarshort
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.appbar.SubtitleCollapsingToolbarLayout
 import kotlinx.android.synthetic.main.activity_news_detail.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
 
-class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
+class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener,KodeinAware {
 
     var isShow = true
     var scrollRange: Int = -1
+    private val args:NewsDetailActivityArgs by navArgs()
+    private lateinit var viewModel:NewsViewModel
+    override val kodein by kodein()
+    private val factory: NewsViewModelFactory by instance<NewsViewModelFactory>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_detail)
-
+        viewModel = ViewModelProvider(this,factory).get(NewsViewModel::class.java)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         val collapsingToolbar = collapsing_toolbar as SubtitleCollapsingToolbarLayout
-        collapsingToolbar.setCollapsedTitleTextColor(getColor(R.color.colorLightGray))
-        collapsingToolbar.setCollapsedSubtitleTextColor(getColor(R.color.colorLightGray))
-        toolbar.navigationIcon?.setColorFilter(resources.getColor(R.color.colorLightGray), PorterDuff.Mode.SRC_ATOP)
         appbar.addOnOffsetChangedListener(this)
 
-        initWebView()
         initData()
 
+        fab.setOnClickListener {
+            viewModel.saveArticle(article = args.article)
+            root_activity.snackbarshort("Article Successfully Saved")
+        }
 
     }
 
-    fun initData(){
+    private fun initData(){
+        val article = args.article
         Glide.with(this)
-            .load(intent.extras?.getString("img"))
+            .load(article.urlToImage)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(iv_img)
 
-
-    }
-
-    fun initWebView(){
-        webView.settings.loadsImagesAutomatically = true
-        webView.settings.javaScriptEnabled = true
-        webView.settings.domStorageEnabled = true
-        webView.settings.setSupportZoom(true)
-        webView.settings.builtInZoomControls = true
-        webView.settings.displayZoomControls = false
-        webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
-        webView.webViewClient = WebViewClient()
-        webView.loadUrl(intent.extras?.getString("url"))
+        webView.apply {
+            settings.loadsImagesAutomatically = true
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.setSupportZoom(true)
+            settings.builtInZoomControls = true
+            settings.displayZoomControls = false
+            scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+            webViewClient = WebViewClient()
+            loadUrl(article.url)
+        }
 
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        val article = args.article
+
         if (scrollRange == -1) {
             scrollRange = appBarLayout!!.totalScrollRange
         }
         if (scrollRange + verticalOffset == 0) {
-            collapsing_toolbar.title = intent.extras?.getString("source")
-            collapsing_toolbar.subtitle = intent.extras?.getString("url")
+            collapsing_toolbar.title = article.source?.name
+            collapsing_toolbar.subtitle = article.url
             isShow = true
         } else if(isShow) {
             collapsing_toolbar.title = " "//careful there should a space between double quote otherwise it wont work
@@ -74,5 +87,19 @@ class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedList
 
             isShow = false
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                val parentIntent = NavUtils.getParentActivityIntent(this)
+                parentIntent!!.flags =
+                    Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                startActivity(parentIntent)
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

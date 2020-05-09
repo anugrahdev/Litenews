@@ -1,40 +1,37 @@
 package com.anugrahdev.litenews.ui.home.business
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.anugrahdev.litenews.R
-import com.anugrahdev.litenews.ui.home.HomeViewModel
-import com.anugrahdev.litenews.ui.home.HomeViewModelFactory
+import com.anugrahdev.litenews.ui.NewsActivity
+import com.anugrahdev.litenews.ui.NewsViewModel
+import com.anugrahdev.litenews.ui.NewsViewModelFactory
 import com.anugrahdev.litenews.ui.home.NewsAdapter
-import kotlinx.android.synthetic.main.business_fragment.*
+import com.anugrahdev.litenews.ui.home.News_Adapter
+import com.anugrahdev.litenews.utils.Resource
 import kotlinx.android.synthetic.main.business_fragment.recycler_view
 import kotlinx.android.synthetic.main.business_fragment.shimmerFrameLayout
-import kotlinx.android.synthetic.main.home_fragment.*
-import org.kodein.di.Kodein
+import kotlinx.android.synthetic.main.science_fragment.*
+import kotlinx.android.synthetic.main.technology_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class BusinessFragment : Fragment(), KodeinAware {
+class BusinessFragment : Fragment(){
 
-    override val kodein by kodein()
-    companion object {
-        fun newInstance() = BusinessFragment()
-    }
-
-    private lateinit var viewModel: HomeViewModel
-    private val factory:HomeViewModelFactory by instance<HomeViewModelFactory>()
-
+    private lateinit var viewModel: NewsViewModel
+    lateinit var newsAdapter: News_Adapter
+    private val TAG ="BusinessFragment"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,18 +42,46 @@ class BusinessFragment : Fragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.show()
+        viewModel = (activity as NewsActivity).viewModel
+        setupRecyclerView()
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putParcelable("article",it)
+            }
+            findNavController().navigate(R.id.action_businessFragment_to_newsDetailActivity,bundle)
+        }
+        viewModel.getNews("id","business")
+        viewModel.news.observe(viewLifecycleOwner, Observer {response->
+            when(response){
+                is Resource.Success->{
 
-        viewModel = ViewModelProvider(this,factory).get(HomeViewModel::class.java)
-        viewModel.getHeadlinesBusiness()
-        viewModel.headlines.observe(viewLifecycleOwner, Observer {news->
-            recycler_view.also{
-                it.layoutManager = LinearLayoutManager(requireContext())
-                it.adapter = NewsAdapter(news,requireContext())
-                shimmerFrameLayout.stopShimmer()
-                shimmerFrameLayout.visibility = View.GONE
-                it.visibility = View.VISIBLE
+                    response.data?.let {
+                        newsAdapter.differ.submitList(it.articles)
+                        shimmerFrameLayout.stopShimmer()
+                        shimmerFrameLayout.visibility = View.GONE
+                    }
+                }
+                is Resource.Error->{
+                    shimmerFrameLayout.stopShimmer()
+                    shimmerFrameLayout.visibility = View.GONE
+                    response.message?.let {
+                        Log.d(TAG,"Error occured $it")
+                    }
+                }
+                is Resource.Loading->{
+                    shimmerFrameLayout.startShimmer()
+                    shimmerFrameLayout.visibility = View.VISIBLE
+                }
             }
         })
+    }
+
+    private fun setupRecyclerView(){
+        newsAdapter = News_Adapter()
+        recycler_view.apply {
+            adapter = newsAdapter
+            layoutManager = LinearLayoutManager(activity)
+        }
     }
 
     override fun onResume() {

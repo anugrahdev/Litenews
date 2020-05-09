@@ -1,6 +1,8 @@
 package com.anugrahdev.litenews.data.network
 
-import com.anugrahdev.litenews.data.db.entities.headlines.HeadlinesResponse
+import com.anugrahdev.litenews.data.db.entities.NewsResponse
+import com.anugrahdev.litenews.utils.Constants.Companion.apiKey
+import com.anugrahdev.litenews.utils.Constants.Companion.base_url
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Response
@@ -9,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val apiKey = "5829064962644ff794744f06d57c7607"
 
 interface ApiService {
 
@@ -17,17 +18,18 @@ interface ApiService {
     suspend fun getTopHeadlines(
         @Query("country") country:String,
         @Query("category") category:String
-    ):Response<HeadlinesResponse>
+    ):Response<NewsResponse>
 
     @GET("everything")
     suspend fun getSearchNews(
-        @Query("language") language:String,
-        @Query("q") query:String
-    )
+        @Query("q") query:String,
+        @Query("language") language:String="id"
+
+    ):Response<NewsResponse>
 
 
     companion object {
-        operator fun invoke() : ApiService{
+        operator fun invoke(connectivityInterceptor: NetworkInterceptor) : ApiService{
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
                     .url()
@@ -42,12 +44,13 @@ interface ApiService {
             }
 
             val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(connectivityInterceptor)
                 .addInterceptor(requestInterceptor)
                 .build()
 
             return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("http://newsapi.org/v2/")
+                .baseUrl(base_url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ApiService::class.java)
