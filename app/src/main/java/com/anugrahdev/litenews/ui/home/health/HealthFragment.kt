@@ -19,10 +19,7 @@ import com.anugrahdev.litenews.ui.NewsViewModelFactory
 import com.anugrahdev.litenews.ui.home.NewsAdapter
 import com.anugrahdev.litenews.ui.home.News_Adapter
 import com.anugrahdev.litenews.utils.Resource
-import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.recycler_view
-import kotlinx.android.synthetic.main.home_fragment.shimmerFrameLayout
-import kotlinx.android.synthetic.main.technology_fragment.*
+import kotlinx.android.synthetic.main.health_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 import org.kodein.di.android.x.kodein

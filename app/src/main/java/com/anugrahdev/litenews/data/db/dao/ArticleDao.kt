@@ -16,4 +16,9 @@ interface ArticleDao {
     @Delete
     suspend fun deleteArticle(article: Article)
 
+    @Query("SELECT * FROM Article WHERE url = :urlparams")
+    fun getAnArticle(urlparams:String):Boolean
+
+    @Query("DELETE FROM Article WHERE url = :urlparams")
+    fun deleteAnArticle(urlparams: String)
 }

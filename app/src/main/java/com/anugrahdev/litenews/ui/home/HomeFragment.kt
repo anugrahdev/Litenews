@@ -18,9 +18,7 @@ import com.anugrahdev.litenews.ui.NewsViewModel
 import com.anugrahdev.litenews.ui.NewsViewModelFactory
 import com.anugrahdev.litenews.utils.Resource
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.business_fragment.*
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.recycler_view
 import kotlinx.android.synthetic.main.home_fragment.shimmerFrameLayout
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -77,7 +75,7 @@ class HomeFragment : Fragment() {
                 "Entertainment"
             )
 
-            );
+        );
 
 
         recycler_view_category.also{
@@ -101,26 +99,30 @@ class HomeFragment : Fragment() {
                 is Resource.Success->{
                     response.data?.let {
                         newsAdapter.differ.submitList(it.articles)
-                        shimmerFrameLayout.stopShimmer()
-                        shimmerFrameLayout.visibility = View.GONE
+                        stopLoading()
                     }
                 }
                 is Resource.Error->{
-                    shimmerFrameLayout.stopShimmer()
-                    shimmerFrameLayout.visibility = View.GONE
+                    stopLoading()
                     response.message?.let {
                         Log.d(TAG,"Error occured $it")
                     }
                 }
                 is Resource.Loading->{
-                    shimmerFrameLayout.startShimmer()
-                    shimmerFrameLayout.visibility = View.VISIBLE
-
+                    startLoading()
                 }
             }
         })
+    }
 
+    private fun startLoading(){
+        shimmerFrameLayout.startShimmer()
+        shimmerFrameLayout.visibility = View.VISIBLE
+    }
 
+    private fun stopLoading(){
+        shimmerFrameLayout.stopShimmer()
+        shimmerFrameLayout.visibility = View.GONE
     }
 
     private fun setupRecyclerView(){

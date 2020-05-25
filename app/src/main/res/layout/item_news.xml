@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10dp"
-                android:paddingBottom="6dp"
+                android:paddingBottom="8dp"
                 android:text="@{news.description}"
                 tools:text="Berita Pemerintah Wajib Jalankan UU Kekarantinaan Kesehatan, Biayai Rakyat! terbaru hari ini 2020-05-03 06:30:02 dari sumber yang terpercaya"
                 android:textSize="12sp" />

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -92,6 +93,19 @@ class ExploreFragment : Fragment() {
             }
         })
 
+        recommend_1.setOnClickListener {
+            et_search.setText(tv_recommend_1.text.toString())
+        }
+
+        recommend_2.setOnClickListener {
+            et_search.setText(tv_recommend_2.text.toString())
+        }
+
+        recommend_3.setOnClickListener {
+            et_search.setText(tv_recommend_3.text.toString())
+        }
+
+
 
     }
 
@@ -100,6 +114,12 @@ class ExploreFragment : Fragment() {
         recycler_view_newssearched.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
+        }
+    }
+
+    private fun recommendSection(){
+        recommend_1.setOnClickListener {
+            et_search.text = tv_recommend_1.editableText
         }
     }
 

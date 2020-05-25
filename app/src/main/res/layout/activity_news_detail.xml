@@ -64,6 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_savebookmark"
+        app:rippleColor="@color/colorTransparenSoftBlack"
+        app:backgroundTint="@color/mainblue"
         android:contentDescription="Save"
         android:layout_margin="16dp" />
 

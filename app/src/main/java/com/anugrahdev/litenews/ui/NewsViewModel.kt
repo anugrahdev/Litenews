@@ -1,5 +1,6 @@
 package com.anugrahdev.litenews.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,13 +10,14 @@ import com.anugrahdev.litenews.data.repositories.NewsRepository
 import com.anugrahdev.litenews.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
-
 class NewsViewModel(private val repository: NewsRepository) : ViewModel() {
 
 
     val news : MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     val searchNews : MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    var newsResponse:NewsResponse = null
+//    init {
+//        getNews("id"," ")
+//    }
 
     fun getNews(country:String, category:String) = viewModelScope.launch {
         news.postValue(Resource.Loading())
@@ -28,6 +30,8 @@ class NewsViewModel(private val repository: NewsRepository) : ViewModel() {
         val response = repository.searchNews(searchQuery)
         searchNews.postValue(handleSearchNewsResponse(response))
     }
+
+
 
     private fun handleNewsResponse(response : Response<NewsResponse>):Resource<NewsResponse>{
         if (response.isSuccessful){
@@ -57,4 +61,8 @@ class NewsViewModel(private val repository: NewsRepository) : ViewModel() {
     fun deleteSavedArticle(article: Article) = viewModelScope.launch {
         repository.deleteSavedArticle(article)
     }
+
+    fun getAnArticle(url:String) = repository.getAnArticle(url)
+
+    fun deleteAnSavedArticle(url: String) = repository.deleteAnArticle(url)
 }

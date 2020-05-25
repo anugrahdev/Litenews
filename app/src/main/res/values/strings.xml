@@ -3,4 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recommend_2">VIRUS CORONA</string>
+    <string name="recommend_1">COVID-19</string>
+    <string name="recommend_3">PRESIDEN JOKOWI</string>
 </resources>

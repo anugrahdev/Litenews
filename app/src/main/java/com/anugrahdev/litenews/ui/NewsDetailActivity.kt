@@ -4,18 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import com.anugrahdev.litenews.R
-import com.anugrahdev.litenews.utils.snackbarshort
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.SubtitleCollapsingToolbarLayout
 import kotlinx.android.synthetic.main.activity_news_detail.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -25,6 +28,7 @@ class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedList
 
     var isShow = true
     var scrollRange: Int = -1
+    var liked = false
     private val args:NewsDetailActivityArgs by navArgs()
     private lateinit var viewModel:NewsViewModel
     override val kodein by kodein()
@@ -40,12 +44,43 @@ class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedList
         supportActionBar?.setDisplayShowTitleEnabled(false)
         val collapsingToolbar = collapsing_toolbar as SubtitleCollapsingToolbarLayout
         appbar.addOnOffsetChangedListener(this)
+        val article = args.article
 
         initData()
+        CoroutineScope(Dispatchers.IO).launch {
+            if (viewModel.getAnArticle(article.url.toString())){
+                liked=true
+                fab.setImageDrawable(getDrawable(R.drawable.ic_saved))
+            }
+        }
 
         fab.setOnClickListener {
-            viewModel.saveArticle(article = args.article)
-            root_activity.snackbarshort("Article Successfully Saved")
+            if(!liked) {
+                viewModel.saveArticle(article)
+                val anim = AnimationUtils.loadAnimation(
+                    fab.getContext(),
+                    R.anim.shake
+                )
+                anim.duration = 200L
+                fab.startAnimation(anim)
+                fab.setImageDrawable(getDrawable(R.drawable.ic_saved))
+
+                liked=true
+            }else{
+                CoroutineScope(Dispatchers.IO).launch {
+                    viewModel.deleteAnSavedArticle(article.url.toString())
+                }
+                val anim = AnimationUtils.loadAnimation(
+                    fab.getContext(),
+                    R.anim.shake
+                )
+                anim.duration = 200L
+                fab.startAnimation(anim)
+                fab.setImageDrawable(getDrawable(R.drawable.ic_savebookmark))
+                liked=false
+
+            }
+
         }
 
     }

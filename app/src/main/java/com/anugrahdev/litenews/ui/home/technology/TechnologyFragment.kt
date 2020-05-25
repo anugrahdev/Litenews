@@ -58,23 +58,19 @@ class TechnologyFragment : Fragment(){
         viewModel.news.observe(viewLifecycleOwner, Observer {response->
             when(response){
                 is Resource.Success->{
-
                     response.data?.let {
                         newsAdapter.differ.submitList(it.articles)
-                        shimmerFrameLayout.stopShimmer()
-                        shimmerFrameLayout.visibility = View.GONE
+                        stopLoading()
                     }
                 }
                 is Resource.Error->{
-                    shimmerFrameLayout.stopShimmer()
-                    shimmerFrameLayout.visibility = View.GONE
+                    stopLoading()
                     response.message?.let {
                         Log.d(TAG,"Error occured $it")
                     }
                 }
                 is Resource.Loading->{
-                    shimmerFrameLayout.startShimmer()
-                    shimmerFrameLayout.visibility = View.VISIBLE
+                    startLoading()
                 }
             }
         })
@@ -82,6 +78,16 @@ class TechnologyFragment : Fragment(){
 
 
     }
+    private fun startLoading(){
+        shimmerFrameLayout.startShimmer()
+        shimmerFrameLayout.visibility = View.VISIBLE
+    }
+
+    private fun stopLoading(){
+        shimmerFrameLayout.stopShimmer()
+        shimmerFrameLayout.visibility = View.GONE
+    }
+
 
     private fun setupRecyclerView(){
         newsAdapter = News_Adapter()
