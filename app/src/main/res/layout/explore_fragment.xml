@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEEEED">
+    android:background="?attr/dividercolor">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:paddingTop="12dp"
                 android:layout_marginBottom="8dp"
                 android:paddingBottom="10dp"
-                android:background="#fefefe"
+                android:background="?attr/bgcolor"
                 android:paddingHorizontal="14dp"
                 android:orientation="vertical">
                 <LinearLayout
@@ -35,14 +35,14 @@
                         android:layout_height="wrap_content"
                         android:textSize="24sp"
                         android:fontFamily="@font/poppinsbold"
-                        android:text="Lite"/>
+                        android:text="@string/lite"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="24sp"
                         android:fontFamily="@font/poppinsbold"
                         android:textColor="#3889D3"
-                        android:text="News"/>
+                        android:text="@string/news"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -55,8 +55,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="14dp"
-                        android:src="@drawable/ic_search"/>
+                        android:layout_marginStart="14dp"
+                        android:src="@drawable/ic_search"
+                        tools:ignore="ContentDescription" />
 
                     <EditText
                         android:id="@+id/et_search"
@@ -66,7 +67,8 @@
                         android:singleLine="true"
                         android:maxLines="1"
                         android:background="@drawable/layout_edittext"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        tools:ignore="Autofill,LabelFor,TextFields" />
 
 
                 </LinearLayout>
@@ -76,11 +78,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
                 android:paddingBottom="10dp"
-                android:paddingHorizontal="14dp"
+                android:paddingHorizontal="9dp"
                 android:orientation="vertical"
-                android:background="#fff">
+                android:background="?attr/bgcolor">
 
                 <LinearLayout
                     android:id="@+id/layout_recommendedsearch"
@@ -93,12 +94,12 @@
                         android:layout_height="wrap_content"
                         android:textSize="24sp"
                         android:fontFamily="@font/poppinsbold"
-                        android:text="Recommended Search"/>
+                        android:text="@string/recommended_search"/>
 
                     <View
                         android:layout_width="100dp"
                         android:layout_height="4dp"
-                        android:background="@color/mainblue"/>
+                        android:background="?colorAccent"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -124,8 +125,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/poppinsbold"
-                                    android:text="#"
-                                    android:textColor="@color/mainblue"
+                                    android:text="@string/hashtag"
+                                    android:textColor="?colorAccent"
                                     android:textSize="18sp" />
 
                                 <TextView
@@ -145,12 +146,13 @@
                                 android:src="@drawable/ic_forward"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
-                            android:background="@color/colorLightGray"/>
+                            android:background="?colorAccent"/>
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/recommend_2"
                             android:layout_width="match_parent"
@@ -169,8 +171,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/poppinsbold"
-                                    android:text="#"
-                                    android:textColor="@color/mainblue"
+                                    android:text="@string/hashtag"
+                                    android:textColor="?colorAccent"
                                     android:textSize="18sp" />
 
                                 <TextView
@@ -188,12 +190,13 @@
                                 android:src="@drawable/ic_forward"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
-                            android:background="@color/colorLightGray"/>
+                            android:background="?colorAccent"/>
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/recommend_3"
                             android:layout_width="match_parent"
@@ -212,8 +215,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/poppinsbold"
-                                    android:text="#"
-                                    android:textColor="@color/mainblue"
+                                    android:text="@string/hashtag"
+                                    android:textColor="?colorAccent"
                                     android:textSize="18sp" />
 
                                 <TextView
@@ -232,13 +235,14 @@
                                 android:src="@drawable/ic_forward"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
-                            android:background="@color/colorLightGray"/>
+                            android:background="?colorAccent"/>
                     </LinearLayout>
 
 

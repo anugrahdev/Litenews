@@ -8,6 +8,6 @@
         android:topLeftRadius="20dp"
         android:topRightRadius="20dp" />
 
-    <solid android:color="#fff" />
+    <solid android:color="?attr/bottomnavcolor" />
 
 </shape>

@@ -1,37 +1,26 @@
 package com.anugrahdev.litenews.ui.home.business
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.anugrahdev.litenews.R
 import com.anugrahdev.litenews.ui.NewsActivity
 import com.anugrahdev.litenews.ui.NewsViewModel
-import com.anugrahdev.litenews.ui.NewsViewModelFactory
 import com.anugrahdev.litenews.ui.home.NewsAdapter
-import com.anugrahdev.litenews.ui.home.News_Adapter
 import com.anugrahdev.litenews.utils.Resource
-import kotlinx.android.synthetic.main.business_fragment.recycler_view
-import kotlinx.android.synthetic.main.business_fragment.shimmerFrameLayout
-import kotlinx.android.synthetic.main.science_fragment.*
-import kotlinx.android.synthetic.main.technology_fragment.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
+import com.anugrahdev.litenews.utils.toast
+import kotlinx.android.synthetic.main.business_fragment.*
 
 class BusinessFragment : Fragment(){
 
     private lateinit var viewModel: NewsViewModel
-    lateinit var newsAdapter: News_Adapter
-    private val TAG ="BusinessFragment"
+    lateinit var newsAdapter: NewsAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,8 +39,8 @@ class BusinessFragment : Fragment(){
             }
             findNavController().navigate(R.id.action_businessFragment_to_newsDetailActivity,bundle)
         }
-        viewModel.getNews("id","business")
-        viewModel.news.observe(viewLifecycleOwner, Observer {response->
+        viewModel.getBusinessNews(viewModel.country,"business")
+        viewModel.businessNews.observe(viewLifecycleOwner, Observer {response->
             when(response){
                 is Resource.Success->{
 
@@ -65,7 +54,7 @@ class BusinessFragment : Fragment(){
                     shimmerFrameLayout.stopShimmer()
                     shimmerFrameLayout.visibility = View.GONE
                     response.message?.let {
-                        Log.d(TAG,"Error occured $it")
+                        requireContext().toast("Error occured : $it")
                     }
                 }
                 is Resource.Loading->{
@@ -77,7 +66,7 @@ class BusinessFragment : Fragment(){
     }
 
     private fun setupRecyclerView(){
-        newsAdapter = News_Adapter()
+        newsAdapter = NewsAdapter()
         recycler_view.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)

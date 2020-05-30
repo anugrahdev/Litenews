@@ -2,7 +2,6 @@ package com.anugrahdev.litenews.data.network
 
 import com.anugrahdev.litenews.utils.ApiException
 import retrofit2.Response
-import java.io.IOException
 
 abstract class SafeApiRequest {
     suspend fun <T:Any> apiRequest(call: suspend() -> Response<T>):T{
@@ -10,7 +9,7 @@ abstract class SafeApiRequest {
         if(response.isSuccessful){
             return response.body()!!
         }else{
-            throw ApiException(response.code().toString())
+            throw ApiException(response.message())
         }
     }
 }

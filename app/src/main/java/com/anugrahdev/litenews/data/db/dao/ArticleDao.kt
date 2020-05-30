@@ -21,4 +21,7 @@ interface ArticleDao {
 
     @Query("DELETE FROM Article WHERE url = :urlparams")
     fun deleteAnArticle(urlparams: String)
+
+    @Query("SELECT * FROM Article WHERE title like '%' || :keyword || '%'")
+    fun searchSavedArticle(keyword: String) : LiveData<List<Article>>
 }

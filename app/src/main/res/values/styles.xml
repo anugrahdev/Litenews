@@ -3,17 +3,20 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/mainblue</item>
+        <item name="colorPrimary">@color/almost_white</item>
+        <item name="colorPrimaryDark">@color/almost_white</item>
+        <item name="colorAccent">@color/main_blue</item>
         <item name="android:windowLightStatusBar">true</item>
-    </style>
+        <item name="android:statusBarColor">@color/colorTransparenSoftWhite</item>
 
-    <style name="AppTheme.detail">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorTransparenSoftBlack</item>
-        <item name="android:windowLightStatusBar">false</item>
-
+        <item name="textcolor">@color/darkest_gray</item>
+        <item name="bgcolor">@color/almost_white</item>
+        <item name="toolbarcolor">@color/almost_white</item>
+        <item name="bottomnavcolor">@color/almost_white</item>
+        <item name="bottomselected">@color/main_blue</item>
+        <item name="bottomnotselected">@color/nobel</item>
+        <item name="dividercolor">@color/cararra</item>
+        <item name="edittextbg">@color/cararra</item>
     </style>
 
 

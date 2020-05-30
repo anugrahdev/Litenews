@@ -134,4 +134,9 @@
             android:id="@+id/action_savedFragment_to_newsDetailActivity"
             app:destination="@id/newsDetailActivity" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.anugrahdev.litenews.ui.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
 </navigation>

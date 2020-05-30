@@ -1,17 +1,18 @@
 package com.anugrahdev.litenews.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.anugrahdev.litenews.R
+import com.anugrahdev.litenews.preferences.PreferenceProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
-import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 class NewsActivity : AppCompatActivity(), KodeinAware {
@@ -20,11 +21,11 @@ class NewsActivity : AppCompatActivity(), KodeinAware {
     override val kodein by kodein()
     lateinit var viewModel: NewsViewModel
     private val factory: NewsViewModelFactory by instance<NewsViewModelFactory>()
+    val prefs: PreferenceProvider by instance<PreferenceProvider>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(toolbar)
         supportActionBar?.title = " "
 
@@ -38,6 +39,13 @@ class NewsActivity : AppCompatActivity(), KodeinAware {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController,null)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (prefs.getDarkMode()){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
 }

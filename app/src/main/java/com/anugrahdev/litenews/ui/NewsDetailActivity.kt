@@ -42,7 +42,7 @@ class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedList
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        val collapsingToolbar = collapsing_toolbar as SubtitleCollapsingToolbarLayout
+        collapsing_toolbar as SubtitleCollapsingToolbarLayout
         appbar.addOnOffsetChangedListener(this)
         val article = args.article
 
@@ -94,7 +94,6 @@ class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedList
 
         webView.apply {
             settings.loadsImagesAutomatically = true
-            settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.setSupportZoom(true)
             settings.builtInZoomControls = true
