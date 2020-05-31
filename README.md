@@ -18,4 +18,9 @@ Android news application with MVVM and Jetpack
  13. [Stetho](http://facebook.github.io/stetho) for SQLite Inspection
  14. API by [NewsAPI](https://newsapi.org/docs) 
  
-[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/anugrahdev/Litenews/edit/master/LICENCE)
+ ### LICENCE
+ ```groovy
+Copyright (c) 2020 Anang Nugraha
+
+```
+[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/anugrahdev/Litenews/blob/master/LICENSE)
