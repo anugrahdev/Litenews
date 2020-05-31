@@ -123,7 +123,7 @@
         tools:layout="@layout/activity_news_detail" >
         <argument
             android:name="article"
-            app:argType="com.anugrahdev.litenews.data.db.entities.Article" />
+            app:argType="com.anugrahdev.litenews.data.entities.Article" />
     </activity>
     <fragment
         android:id="@+id/savedFragment"

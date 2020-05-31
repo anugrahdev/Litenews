@@ -1,4 +1,4 @@
-package com.anugrahdev.litenews.ui.home
+package com.anugrahdev.litenews.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.anugrahdev.litenews.R
-import com.anugrahdev.litenews.data.db.entities.Article
+import com.anugrahdev.litenews.data.entities.Article
 import com.anugrahdev.litenews.databinding.ItemNewsBinding
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>(){
@@ -47,7 +47,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>(){
                 onItemClickListener?.let{ it(article) }
             }
         }
-
+//        @RequiresApi(Build.VERSION_CODES.N)
+//        holder.item.tvDate.text = Utils.DateFormat(article.publishedAt)
 
 
     }

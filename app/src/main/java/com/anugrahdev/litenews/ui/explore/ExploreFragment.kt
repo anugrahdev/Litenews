@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anugrahdev.litenews.R
 import com.anugrahdev.litenews.ui.NewsActivity
 import com.anugrahdev.litenews.ui.NewsViewModel
-import com.anugrahdev.litenews.ui.home.NewsAdapter
+import com.anugrahdev.litenews.adapter.NewsAdapter
 import com.anugrahdev.litenews.utils.Constants.Companion.NEWS_SEARCH_DELAY
 import com.anugrahdev.litenews.utils.Resource
 import com.anugrahdev.litenews.utils.toast
@@ -65,9 +65,10 @@ class ExploreFragment : Fragment() {
         viewModel.searchNews.observe(viewLifecycleOwner, Observer {response->
             when(response){
                 is Resource.Success->{
-                    layout_recommendedsearch.visibility = View.GONE
                     response.data?.let {
                         newsAdapter.differ.submitList(it.articles)
+                        layout_recommendedsearch.visibility = View.GONE
+
                     }
                 }
                 is Resource.Error->{
@@ -76,7 +77,6 @@ class ExploreFragment : Fragment() {
                     }
                 }
                 is Resource.Loading->{
-                    layout_recommendedsearch.visibility = View.VISIBLE
                 }
             }
         })

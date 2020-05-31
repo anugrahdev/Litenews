@@ -1,16 +1,22 @@
 package com.anugrahdev.litenews.ui
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
+import androidx.webkit.WebSettingsCompat
+import androidx.webkit.WebViewFeature
 import com.anugrahdev.litenews.R
+import com.anugrahdev.litenews.preferences.PreferenceProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.appbar.AppBarLayout
@@ -25,7 +31,7 @@ import org.kodein.di.generic.instance
 
 
 class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener,KodeinAware {
-
+    private val prefs: PreferenceProvider by instance<PreferenceProvider>()
     var isShow = true
     var scrollRange: Int = -1
     var liked = false
@@ -92,15 +98,36 @@ class NewsDetailActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedList
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(iv_img)
 
+
+
+
         webView.apply {
-            settings.loadsImagesAutomatically = true
-            settings.domStorageEnabled = true
-            settings.setSupportZoom(true)
-            settings.builtInZoomControls = true
-            settings.displayZoomControls = false
-            scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
-            webViewClient = WebViewClient()
+            if (prefs.getDarkMode()){
+                if(WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+                    WebSettingsCompat.setForceDark(webView.getSettings(), WebSettingsCompat.FORCE_DARK_ON)
+                }
+            }
+            val webViewClient: WebViewClient = object: WebViewClient() {
+
+                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                    view?.loadUrl(request?.url.toString())
+                    return super.shouldOverrideUrlLoading(view, request)
+                }
+
+                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                    progressbar.visibility = View.VISIBLE
+                    super.onPageStarted(view, url, favicon)
+                }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    progressbar.visibility = View.GONE
+                    super.onPageFinished(view, url)
+                }
+            }
             loadUrl(article.url)
+            webView.webViewClient = webViewClient
+            webView.settings.javaScriptEnabled = false
+            scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
         }
 
     }

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="category"
-            type="com.anugrahdev.litenews.data.db.entities.Category" />
+            type="com.anugrahdev.litenews.data.entities.Category" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -30,7 +30,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:imageResource="@{category.foto}"
-                tools:src="@drawable/entertainment" />
+                tools:src="@drawable/entertainment"
+                tools:ignore="ContentDescription" />
 
             <View
                 android:layout_width="wrap_content"
@@ -51,7 +52,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 tools:text="Entertainment" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

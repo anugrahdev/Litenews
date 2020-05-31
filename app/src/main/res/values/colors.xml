@@ -10,7 +10,8 @@
     <color name="colorSoftBlack">#2C2C2C</color>
     <color name="colorTransparentBlack">#7F000000</color>
     <color name="colorTransparenSoftBlack">#80000000</color>
-    <color name="colorTransparenSoftWhite">#37FFFFFF</color>
+    <color name="colorTransparenSoftWhite">#80FFFFFF</color>
+    <color name="colorTransparenSoftWhite2">#D2Fefefe</color>
     <color name="purple_heart">#5B37B7</color>
     <color name="medium_red_violet">#C9379D</color>
     <color name="golden_grass">#E6A919</color>

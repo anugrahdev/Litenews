@@ -1,7 +1,7 @@
 package com.anugrahdev.litenews.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +12,13 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.anugrahdev.litenews.R
 import com.anugrahdev.litenews.preferences.PreferenceProvider
+import com.anugrahdev.litenews.ui.AboutActivity
 import com.anugrahdev.litenews.ui.NewsActivity
 import com.anugrahdev.litenews.ui.NewsViewModel
 import com.neovisionaries.i18n.CountryCode
 import kotlinx.android.synthetic.main.settings_fragment.*
 import java.util.*
 
-const val TAG = "SettingsFragment"
 class SettingsFragment : Fragment() {
     lateinit var viewModel: NewsViewModel
     lateinit var prefs: PreferenceProvider
@@ -53,7 +53,6 @@ class SettingsFragment : Fragment() {
         val countryList = listOf("France","United Kingdom","Indonesia","Japan","United States","Singapore")
         val country :String?
         country = CountryCode.getByCode(prefs.getCountry().toUpperCase(Locale.ROOT)).getName().toString()
-        Log.d(TAG, CountryCode.findByName("United Kingdom").toString())
         tv_selectedCountry.setText(country)
         settingCountry.setOnClickListener {
             MaterialDialog(requireContext()).show {
@@ -72,6 +71,12 @@ class SettingsFragment : Fragment() {
                 }
             }
         }
+        settingAbout.setOnClickListener {
+            Intent(requireContext(), AboutActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
 
     }
 

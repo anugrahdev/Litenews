@@ -1,7 +1,7 @@
 package com.anugrahdev.litenews.data.db
 
 import androidx.room.TypeConverter
-import com.anugrahdev.litenews.data.db.entities.Source
+import com.anugrahdev.litenews.data.entities.Source
 
 class Converters {
     @TypeConverter

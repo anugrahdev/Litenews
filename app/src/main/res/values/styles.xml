@@ -10,6 +10,7 @@
         <item name="android:statusBarColor">@color/colorTransparenSoftWhite</item>
 
         <item name="textcolor">@color/darkest_gray</item>
+        <item name="textcolortransparent">@color/colorTransparenSoftBlack</item>
         <item name="bgcolor">@color/almost_white</item>
         <item name="toolbarcolor">@color/almost_white</item>
         <item name="bottomnavcolor">@color/almost_white</item>
@@ -17,6 +18,8 @@
         <item name="bottomnotselected">@color/nobel</item>
         <item name="dividercolor">@color/cararra</item>
         <item name="edittextbg">@color/cararra</item>
+        <item name="transparentbackground">@color/colorTransparenSoftWhite2</item>
+
     </style>
 
 

@@ -1,4 +1,4 @@
-package com.anugrahdev.litenews.ui.home.health
+package com.anugrahdev.litenews.ui.home.science
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,28 +10,28 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anugrahdev.litenews.R
-import com.anugrahdev.litenews.adapter.NewsAdapter
 import com.anugrahdev.litenews.ui.NewsActivity
 import com.anugrahdev.litenews.ui.NewsViewModel
+import com.anugrahdev.litenews.adapter.NewsAdapter
 import com.anugrahdev.litenews.utils.Resource
 import com.anugrahdev.litenews.utils.toast
-import kotlinx.android.synthetic.main.health_fragment.*
+import kotlinx.android.synthetic.main.science_fragment.*
 
+class ScienceFragment : Fragment() {
 
-class HealthFragment : Fragment() {
-
-    lateinit var newsAdapter: NewsAdapter
     private lateinit var viewModel: NewsViewModel
+    lateinit var newsAdapter: NewsAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.health_fragment, container, false)
+        return inflater.inflate(R.layout.science_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         (activity as AppCompatActivity).supportActionBar?.show()
         viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
@@ -39,17 +39,16 @@ class HealthFragment : Fragment() {
             val bundle = Bundle().apply {
                 putParcelable("article",it)
             }
-            findNavController().navigate(R.id.action_healthFragment_to_newsDetailActivity,bundle)
+            findNavController().navigate(R.id.action_scienceFragment_to_newsDetailActivity,bundle)
         }
-        viewModel.getHealthNews(viewModel.country,"health")
-        viewModel.healthNews.observe(viewLifecycleOwner, Observer {response->
-            when(response){
+        viewModel.getScienceNews(viewModel.country,"science")
+        viewModel.scienceNews.observe(viewLifecycleOwner, Observer {response->
+             when(response){
                 is Resource.Success->{
-
+                    shimmerFrameLayout.stopShimmer()
+                    shimmerFrameLayout.visibility = View.GONE
                     response.data?.let {
                         newsAdapter.differ.submitList(it.articles)
-                        shimmerFrameLayout.stopShimmer()
-                        shimmerFrameLayout.visibility = View.GONE
                     }
                 }
                 is Resource.Error->{

@@ -15,6 +15,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import timber.log.Timber
 
 class MyApplication:Application(), KodeinAware {
     override val kodein = Kodein.lazy {
@@ -36,5 +37,8 @@ class MyApplication:Application(), KodeinAware {
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }

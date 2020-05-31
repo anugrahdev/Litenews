@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.anugrahdev.litenews.data.db.entities.Article
-import com.anugrahdev.litenews.data.db.entities.NewsResponse
+import com.anugrahdev.litenews.data.entities.Article
+import com.anugrahdev.litenews.data.entities.NewsResponse
 import com.anugrahdev.litenews.data.repositories.NewsRepository
 import com.anugrahdev.litenews.preferences.PreferenceProvider
 import com.anugrahdev.litenews.utils.Resource

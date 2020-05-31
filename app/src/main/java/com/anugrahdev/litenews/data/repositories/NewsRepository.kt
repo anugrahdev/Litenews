@@ -1,7 +1,7 @@
 package com.anugrahdev.litenews.data.repositories
 
 import com.anugrahdev.litenews.data.db.NewsDatabase
-import com.anugrahdev.litenews.data.db.entities.Article
+import com.anugrahdev.litenews.data.entities.Article
 import com.anugrahdev.litenews.data.network.ApiService
 import com.anugrahdev.litenews.data.network.SafeApiRequest
 

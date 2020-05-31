@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="com.anugrahdev.litenews.utils.Utils"/>
         <variable name="news"
-            type="com.anugrahdev.litenews.data.db.entities.Article" />
+            type="com.anugrahdev.litenews.data.entities.Article" />
 
     </data>
 
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
@@ -33,7 +33,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:image="@{news.urlToImage}"
-                tools:src="@drawable/sport" />
+                tools:src="@drawable/sport"
+                tools:ignore="ContentDescription" />
 
 
             <TextView
@@ -53,11 +54,33 @@
                 android:text="@{news.description}"
                 tools:text="Berita Pemerintah Wajib Jalankan UU Kekarantinaan Kesehatan, Biayai Rakyat! terbaru hari ini 2020-05-03 06:30:02 dari sumber yang terpercaya"
                 android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textSize="12sp"
+                    android:text="@{news.source.name + ` - `}"
+                    tools:text="Kompas - "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsmed"
+                    android:textSize="12sp"
+                    android:text="@{Utils.INSTANCE.DateToTimeFormat(news.publishedAt)}"
+                    tools:text="1 Jam Lalu"/>
+            </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:background="@color/colorLightGray"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 

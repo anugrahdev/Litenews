@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anugrahdev.litenews.R
 import com.anugrahdev.litenews.ui.NewsActivity
 import com.anugrahdev.litenews.ui.NewsViewModel
-import com.anugrahdev.litenews.ui.home.NewsAdapter
+import com.anugrahdev.litenews.adapter.NewsAdapter
 import com.anugrahdev.litenews.utils.Resource
 import com.anugrahdev.litenews.utils.toast
 import kotlinx.android.synthetic.main.technology_fragment.*

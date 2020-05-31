@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/mine_shaft</item>
+        <item name="colorPrimaryDark">@color/darkest_gray</item>
+        <item name="colorAccent">@color/main_bluealt</item>
+        <item name="android:statusBarColor">@color/colorTransparenSoftBlack</item>
+
+        <item name="textcolor">@color/almost_white</item>
+        <item name="textcolortransparent">@color/colorTransparenSoftWhite</item>
+        <item name="bgcolor">@color/darkest_gray</item>
+        <item name="toolbarcolor">@color/mine_shaft</item>
+        <item name="bottomnavcolor">@color/mine_shaft</item>
+        <item name="bottomselected">@color/main_bluealt</item>
+        <item name="bottomnotselected">@color/nobel</item>
+        <item name="dividercolor">@color/black</item>
+        <item name="edittextbg">@color/grey_800</item>
+        <item name="transparentbackground">@color/colorTransparenSoftBlack</item>
+
+
+    </style>
+
+
+</resources>

@@ -1,4 +1,4 @@
-package com.anugrahdev.litenews.ui.home
+package com.anugrahdev.litenews.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.anugrahdev.litenews.R
-import com.anugrahdev.litenews.data.db.entities.Category
+import com.anugrahdev.litenews.data.entities.Category
 import com.anugrahdev.litenews.databinding.ItemCategoryBinding
 
 class CategoryAdapter(

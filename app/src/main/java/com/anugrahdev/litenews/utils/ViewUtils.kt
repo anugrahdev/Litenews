@@ -4,10 +4,11 @@ import android.content.Context
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.snackbar.Snackbar
 
 fun Context.toast (message:String){
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
 fun ProgressBar.show(){
@@ -16,6 +17,16 @@ fun ProgressBar.show(){
 
 fun ProgressBar.hide(){
     visibility = View.GONE
+}
+
+fun ShimmerFrameLayout.start(){
+    visibility = View.VISIBLE
+    startShimmer()
+}
+
+fun ShimmerFrameLayout.stop(){
+    visibility = View.GONE
+    stopShimmer()
 }
 
 fun View.snackbarshort(message: String){

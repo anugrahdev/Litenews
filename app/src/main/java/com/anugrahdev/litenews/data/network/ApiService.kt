@@ -1,6 +1,6 @@
 package com.anugrahdev.litenews.data.network
 
-import com.anugrahdev.litenews.data.db.entities.NewsResponse
+import com.anugrahdev.litenews.data.entities.NewsResponse
 import com.anugrahdev.litenews.utils.Constants.Companion.apiKey
 import com.anugrahdev.litenews.utils.Constants.Companion.base_url
 import okhttp3.Interceptor
@@ -48,8 +48,8 @@ interface ApiService {
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(connectivityInterceptor)
                 .addInterceptor(requestInterceptor)
-                .readTimeout(90, TimeUnit.SECONDS)
-                .connectTimeout(90, TimeUnit.SECONDS)
+                .readTimeout(150, TimeUnit.SECONDS)
+                .connectTimeout(150, TimeUnit.SECONDS)
                 .build()
 
             return Retrofit.Builder()

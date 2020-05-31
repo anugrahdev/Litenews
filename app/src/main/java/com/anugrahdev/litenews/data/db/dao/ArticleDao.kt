@@ -2,7 +2,7 @@ package com.anugrahdev.litenews.data.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.anugrahdev.litenews.data.db.entities.Article
+import com.anugrahdev.litenews.data.entities.Article
 
 @Dao
 interface ArticleDao {

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anugrahdev.litenews.R
 import com.anugrahdev.litenews.ui.NewsActivity
 import com.anugrahdev.litenews.ui.NewsViewModel
-import com.anugrahdev.litenews.ui.home.NewsAdapter
+import com.anugrahdev.litenews.adapter.NewsAdapter
 import com.anugrahdev.litenews.utils.Constants
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_saved.*

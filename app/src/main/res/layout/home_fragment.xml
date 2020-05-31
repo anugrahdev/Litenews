@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.home.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.HomeFragment"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -48,6 +53,8 @@
                     tools:listitem="@layout/item_category" />
             </LinearLayout>
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,34 +78,50 @@
                         android:layout_height="4dp"
                         android:background="?colorAccent"/>
                 </LinearLayout>
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmerFrameLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:paddingBottom="24dp"
-                    android:paddingHorizontal="8dp"
-                    android:paddingTop="10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardCornerRadius="10dp">
+                    <com.smarteist.autoimageslider.SliderView
+                        android:id="@+id/imageSlider"
                         android:layout_width="match_parent"
+                        android:layout_height="185dp"
+                        android:background="@color/placeholder_color"
+                        app:sliderAutoCycleDirection="back_and_forth"
+                        app:sliderIndicatorGravity="center_horizontal|bottom"
+                        app:sliderIndicatorMargin="5dp"
+                        app:sliderAutoCycleEnabled="true"
+                        app:sliderStartAutoCycle="true"
+                        app:sliderIndicatorOrientation="horizontal"
+                        app:sliderIndicatorPadding="8dp"
+                        app:sliderIndicatorRadius="2.35dp"
+                        app:sliderIndicatorMarginBottom="7dp"
+                        app:sliderIndicatorSelectedColor="?colorAccent"
+                        app:sliderScrollTimeInSec="4"
+                        app:sliderIndicatorUnselectedColor="#6b6b6f" />
+                </androidx.cardview.widget.CardView>
+
+                <include layout="@layout/shimmer"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="14dp"
+                    android:paddingTop="8dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <include layout="@layout/item_newsplaceholder" />
-
-                        <include layout="@layout/item_newsplaceholder" />
-
-                        <include layout="@layout/item_newsplaceholder" />
-
-                        <include layout="@layout/item_newsplaceholder" />
-
-                        <include layout="@layout/item_newsplaceholder" />
-
-                    </LinearLayout>
-                </com.facebook.shimmer.ShimmerFrameLayout>
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppinsbold"
+                        android:text="@string/recent_news"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="?colorAccent"/>
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
@@ -113,14 +136,8 @@
 
             </LinearLayout>
 
-
-
-
-
-
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
 
-</layout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

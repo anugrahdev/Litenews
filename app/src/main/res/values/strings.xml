@@ -26,4 +26,7 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="country_of_news">Country of news</string>
     <string name="about">About</string>
+    <string name="lorem_s">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="lorem_m">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc feugiat nisi sit amet facilisis fringilla.</string>
+    <string name="recent_news">Recent News</string>
 </resources>
