@@ -1,6 +1,8 @@
 # Litenews
-Android news application with MVVM and Jetpack
-
+Android news application with MVVM architectural pattern and Jetpack
+<p align="center">
+<img src="https://i.ibb.co/4pJ6wQW/litenews-mock-min.png" height="420px" width="730px"/> 
+ </p>
 **Tech Stack :**
 
  1. Kotlin
