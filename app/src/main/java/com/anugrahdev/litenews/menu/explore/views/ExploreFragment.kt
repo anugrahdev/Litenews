@@ -50,7 +50,6 @@ class ExploreFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.hide()
         setupRecyclerView()
 
         var job: Job? = null
@@ -113,6 +112,11 @@ class ExploreFragment : Fragment(), KodeinAware {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
 

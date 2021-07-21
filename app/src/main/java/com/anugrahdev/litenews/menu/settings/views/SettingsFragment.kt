@@ -38,7 +38,6 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.hide()
         prefs = (activity as NewsActivity).prefs
 
         if (prefs.getDarkMode()){
@@ -59,7 +58,7 @@ class SettingsFragment : Fragment() {
         val country :String?
         country = CountryCode.getByCode(prefs.getCountry().toUpperCase(Locale.ROOT)).getName().toString()
         binding.tvSelectedCountry.setText(country)
-        binding.settingAbout.setOnClickListener {
+        binding.settingCountry.setOnClickListener {
             MaterialDialog(requireContext()).show {
                 var init = 0
                 for (i in countryList.indices){
@@ -82,7 +81,11 @@ class SettingsFragment : Fragment() {
             }
         }
 
+    }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
 }

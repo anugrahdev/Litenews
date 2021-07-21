@@ -23,7 +23,6 @@ class AboutActivity : AppCompatActivity() {
             .addGitHubLink("anugrahdev")
             .addFacebookLink("anangnugraha8")
             .addEmailLink("anangnugraha8@gmail.com")
-            .addWhatsAppDirectChat("+6285840764050")
             .addInstagramLink("anangnugraha8")
             .addTwitterLink("anangnugraha8")
             .addWebsiteLink("https://anugrahdev.github.io/")
