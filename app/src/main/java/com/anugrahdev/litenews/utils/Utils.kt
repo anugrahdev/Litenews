@@ -26,7 +26,7 @@ object Utils {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        return isTime!!
+        return isTime ?: ""
     }
 
     @SuppressLint("SimpleDateFormat")

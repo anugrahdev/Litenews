@@ -3,7 +3,7 @@
     <data>
         <variable
             name="data"
-            type="com.anugrahdev.litenews.data.entities.Article">
+            type="com.anugrahdev.litenews.menu.home.models.Article">
 
         </variable>
     </data>

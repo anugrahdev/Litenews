@@ -6,7 +6,7 @@
     <data>
         <variable
             name="category"
-            type="com.anugrahdev.litenews.data.entities.Category" />
+            type="com.anugrahdev.litenews.menu.home.models.Category" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -22,7 +22,7 @@ class PreferenceProvider(context: Context) {
     }
 
     fun getCountry():String{
-        return preference.getString(KEY_COUNTRY, "ID")!!
+        return preference.getString(KEY_COUNTRY, "US")!!
     }
 
     fun setDarkMode(dark: Boolean){

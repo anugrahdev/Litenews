@@ -3,7 +3,7 @@
     <data>
         <import type="com.anugrahdev.litenews.utils.Utils"/>
         <variable name="news"
-            type="com.anugrahdev.litenews.data.entities.Article" />
+            type="com.anugrahdev.litenews.menu.home.models.Article" />
 
     </data>
 
@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
+        android:layout_marginTop="8dp"
         app:cardElevation="2dp"
         android:layout_marginHorizontal="4dp"
         android:layout_marginBottom="18dp">
